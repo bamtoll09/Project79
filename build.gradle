@@ -1,0 +1,41 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin:'application'
+
+mainClassName = 'moe.bamtoll.ApplicationMain'
+
+ext {
+    javaVersion='1.8'
+}
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.mongodb:mongodb-driver:3.4.0'
+}
+
+jar {
+    manifest {
+        attributes  'Title': 'Pick!-Pick!', 'Version': version, 'Main-Class': mainClassName
+    }
+    archiveName 'Pick!-Pick!.jar'
+    dependsOn configurations.runtime
+    from {
+        configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.2.1'
+}

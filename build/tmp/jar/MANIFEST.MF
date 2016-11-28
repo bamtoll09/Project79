@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Title: Pick!-Pick!
+Version: 1.0-SNAPSHOT
+Main-Class: moe.bamtoll.ApplicationMain
+
